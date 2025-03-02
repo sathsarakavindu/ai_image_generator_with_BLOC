@@ -162,11 +162,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             case ImageGeneratorLoadingState:
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              );
+              return Center(child: Image.asset(AppConfig.loading_giff));
             case ImageGeneratorSuccessState:
               final successState = state as ImageGeneratorSuccessState;
               return SizedBox(
