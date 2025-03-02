@@ -6,4 +6,5 @@ class AppConfig {
   static Color app_bar_txt_color = Colors.white;
   static Color app_bar_bg_color = const Color.fromARGB(255, 41, 40, 40);
   static Color app_bg_color = const Color.fromARGB(255, 41, 40, 40);
+  static String inital_image = 'assets/icons/initial_image.png';
 }
