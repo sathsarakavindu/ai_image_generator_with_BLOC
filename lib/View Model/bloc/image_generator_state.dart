@@ -9,6 +9,9 @@ class InitialState extends ImageGeneratorState {}
 
 class ImageGeneratorLoadingState extends ImageGeneratorState {}
 
-class ImageGeneratorSuccessState extends ImageGeneratorState {}
+class ImageGeneratorSuccessState extends ImageGeneratorState {
+  final Uint8List uint8list;
+  ImageGeneratorSuccessState({required this.uint8list});
+}
 
 class ImageGeneratorErrorState extends ImageGeneratorState {}

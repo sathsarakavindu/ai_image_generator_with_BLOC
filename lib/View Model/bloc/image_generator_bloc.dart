@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:typed_data';
 
+import 'package:ai_image_generator/View%20Model/Respositories/generate_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -20,7 +22,20 @@ class ImageGeneratorBloc
     );
   }
 
+  final GenerateRepo repo = GenerateRepo();
+
   FutureOr<void> imageGenerateButtonClickEvent(
       ImageGenerateButtonClickEvent event,
-      Emitter<ImageGeneratorState> emit) async {}
+      Emitter<ImageGeneratorState> emit) async {
+    emit(
+      ImageGeneratorLoadingState(),
+    );
+    final enteredValue = event.txt;
+    final Uint8List? generated_image =
+        await GenerateRepo.generateAIImage(enteredValue);
+
+    emit(
+      ImageGeneratorSuccessState(uint8list: generated_image!),
+    );
+  }
 }

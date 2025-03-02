@@ -27,6 +27,7 @@ class GenerateRepo {
     try {
       final response = await dio.post(url, data: formData);
       if (response.statusCode == 200) {
+        print("Status code ${response.statusCode}");
         log(response.data.runtimeType.toString());
         log(response.data.toString());
         Uint8List uint8list = Uint8List.fromList(response.data);
