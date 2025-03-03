@@ -9,3 +9,8 @@ class ImageGenerateButtonClickEvent extends ImageGeneratorEvent {
   final String txt;
   ImageGenerateButtonClickEvent({required this.txt});
 }
+
+class ImageDownloadButtonClickedEvent extends ImageGeneratorEvent {
+  final Uint8List uint8list;
+  ImageDownloadButtonClickedEvent({required this.uint8list});
+}

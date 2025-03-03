@@ -5,6 +5,8 @@ sealed class ImageGeneratorState {}
 
 final class ImageGeneratorInitial extends ImageGeneratorState {}
 
+abstract class ImageActionState extends ImageGeneratorState {}
+
 class InitialState extends ImageGeneratorState {}
 
 class ImageGeneratorLoadingState extends ImageGeneratorState {}
@@ -15,3 +17,5 @@ class ImageGeneratorSuccessState extends ImageGeneratorState {
 }
 
 class ImageGeneratorErrorState extends ImageGeneratorState {}
+
+class ImageDownloadState extends ImageActionState {}

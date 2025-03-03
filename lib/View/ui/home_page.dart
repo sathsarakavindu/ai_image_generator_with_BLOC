@@ -1,9 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:ai_image_generator/View%20Model/Respositories/image_download.dart';
 import 'package:ai_image_generator/View%20Model/bloc/image_generator_bloc.dart';
 import 'package:ai_image_generator/View/config/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saver_gallery/saver_gallery.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,6 +26,33 @@ class _HomePageState extends State<HomePage> {
       InitialEvent(),
     );
   }
+
+  /// Displays a toast message with the given information.
+  // void _toastInfo(String info) {
+  //   print(info);
+  //   Fluttertoast.showToast(
+  //       msg: info,
+  //       toastLength: Toast.LENGTH_LONG,
+  //       backgroundColor: Colors.black,
+  //       textColor: Colors.white);
+  // }
+
+  // Future<void> _saveUint8ListImage(Uint8List uint8list) async {
+  //   try {
+  //     String imageName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
+
+  //     final result = await SaverGallery.saveImage(
+  //       uint8list,
+  //       fileName: imageName,
+  //       androidRelativePath: "Pictures/SavedImages",
+  //       skipIfExists: false,
+  //     );
+
+  //     _toastInfo("Image Successfully Downloaded");
+  //   } catch (e) {
+  //     _toastInfo("Error saving image: $e");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -282,7 +312,13 @@ class _HomePageState extends State<HomePage> {
                                 const Icon(Icons.download, color: Colors.black),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.lightGreenAccent),
-                            onPressed: () {},
+                            onPressed: () {
+                              //await _saveUint8ListImage(successState.uint8list);
+                              imageGeneratorBloc.add(
+                                ImageDownloadButtonClickedEvent(
+                                    uint8list: successState.uint8list),
+                              );
+                            },
                             label: const Text(
                               "Download",
                               style: TextStyle(
@@ -300,7 +336,13 @@ class _HomePageState extends State<HomePage> {
               return const SizedBox();
           }
         },
-        listener: (context, state) {},
+        // buildWhen: (previous, current) => current is ImageActionState,
+        // listenWhen: (previous, current) => current is! ImageActionState,
+        listener: (context, state) {
+          // if (state is ImageDownloadState) {
+          //   ImageDownload().toastInfo("Image succesfully downloaded..!");
+          // }
+        },
       ),
     );
   }
