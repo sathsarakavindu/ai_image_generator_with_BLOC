@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:ai_image_generator/View%20Model/Respositories/generate_repo.dart';
+import 'package:ai_image_generator/View%20Model/Respositories/image_download.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -13,6 +14,7 @@ class ImageGeneratorBloc
   ImageGeneratorBloc() : super(ImageGeneratorInitial()) {
     on<InitialEvent>(initialEvent);
     on<ImageGenerateButtonClickEvent>(imageGenerateButtonClickEvent);
+    on<ImageDownloadButtonClickedEvent>(imageDownloadButtonClickedEvent);
   }
 
   FutureOr<void> initialEvent(
@@ -36,6 +38,15 @@ class ImageGeneratorBloc
 
     emit(
       ImageGeneratorSuccessState(uint8list: generated_image!),
+    );
+  }
+
+  FutureOr<void> imageDownloadButtonClickedEvent(
+      ImageDownloadButtonClickedEvent event,
+      Emitter<ImageGeneratorState> emit) async {
+    await ImageDownload().saveUint8ListImage(event.uint8list);
+    emit(
+      ImageDownloadState(),
     );
   }
 }
