@@ -336,12 +336,13 @@ class _HomePageState extends State<HomePage> {
               return const SizedBox();
           }
         },
-        // buildWhen: (previous, current) => current is ImageActionState,
-        // listenWhen: (previous, current) => current is! ImageActionState,
+        listenWhen: (previous, current) => current is ImageActionState,
+        buildWhen: (previous, current) => current is! ImageActionState,
         listener: (context, state) {
-          // if (state is ImageDownloadState) {
-          //   ImageDownload().toastInfo("Image succesfully downloaded..!");
-          // }
+          if (state is ImageDownloadState) {
+            print("State called");
+            ImageDownload().toastInfo("Image succesfully downloaded..!");
+          }
         },
       ),
     );

@@ -45,6 +45,8 @@ class ImageGeneratorBloc
       ImageDownloadButtonClickedEvent event,
       Emitter<ImageGeneratorState> emit) async {
     await ImageDownload().saveUint8ListImage(event.uint8list);
-    //emit(ImageDownloadState(),);
+    emit(
+      ImageDownloadState(),
+    );
   }
 }
